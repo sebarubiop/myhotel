@@ -50,9 +50,8 @@ export class HomeComponent implements OnInit {
   }
 
   onFilterChange(event) {
-    console.log(event)
     if (event.value) {
-      this.dataSource.data = this.temp.filter((p: Person) => !!p.color.find(c => c.value === event.value))
+      this.dataSource.data = this.temp.filter((p: Person) => !!p.color.find(c => c === event.value))
     }
     else {
       this.dataSource.data = this.temp
@@ -68,7 +67,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/edit', person.id])
   }
 
-  async deletePerson(person: Person) {
+  deletePerson(person: Person) {
+    this.personService.deletePerson(person.id)
   }
 
 }

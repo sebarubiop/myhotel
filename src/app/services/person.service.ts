@@ -36,8 +36,12 @@ export class PersonService {
   }
 
   updatePerson(id: number, data: Person) {
+    const personListValue = this.getPersonListValue()
+    this.personList.next(personListValue.map(p => p.id === id ? data : p))
   }
 
   deletePerson(id: number) {
+    const personListValue = this.getPersonListValue()
+    this.personList.next(personListValue.filter(p => p.id !== id))
   }
 }

@@ -1,10 +1,6 @@
 <h1>Person List Management</h1>
-<button mat-flat-button color="primary" (click)="addPerson()" title="Add">
-  <mat-icon>add</mat-icon>
-  Add Single Person
-</button>
-<ng-container *ngIf="temp?.length > 0">
 
+<div class="action-row">
   <mat-form-field appearance="fill">
     <mat-label>Filter results</mat-label>
     <mat-select #filtro (selectionChange)="onFilterChange($event)">
@@ -14,7 +10,13 @@
     <mat-hint align="start">
       {{filtro.value ? filtro.value : "Total"}}: <strong>{{dataSource?.data?.length}}</strong></mat-hint>
   </mat-form-field>
+  <button mat-flat-button color="primary" (click)="addPerson()" title="Add">
+    <mat-icon>add</mat-icon>
+    Add Single Person
+  </button>
+</div>
 
+<ng-container *ngIf="temp?.length > 0">
   <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef> Creation date </mat-header-cell>

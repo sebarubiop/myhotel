@@ -70,7 +70,7 @@ export class AdminPersonFormComponent implements OnInit {
     if(this.personaForm.value.colorCtrl) {
       selectedColors = this.colorList.filter(c => !!this.personaForm.value.colorCtrl.find(v => v === c.value))
     }
-    const personData = {
+    let personData = {
       id: today.getTime(),
       creation_date: today.toLocaleString(),
       rut: this.personaForm.value.rutCtrl,
@@ -87,6 +87,11 @@ export class AdminPersonFormComponent implements OnInit {
       else if(this.isEdit){
         delete personData.id
         delete personData.creation_date
+        personData = {
+          ...personData,
+          id: this.person.id,
+          creation_date: this.person.creation_date
+        }
         this.personService.updatePerson(this.person.id, personData)
         this.goToHome()
       }
