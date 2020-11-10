@@ -1,0 +1,60 @@
+<form [formGroup]="personaForm" (submit)="submitPersona()" class="form-area">
+
+  <mat-form-field class="field-area">
+    <mat-label>RUT</mat-label>
+    <input matInput formControlName="rutCtrl" placeholder="Ej. 11111111-1" required>
+    <mat-error *ngIf="personaForm.controls.rutCtrl.errors?.required && personaForm.controls.rutCtrl.dirty">
+      required RUT
+    </mat-error>
+    <mat-error *ngIf="personaForm.controls.rutCtrl.errors?.invalidRut && personaForm.controls.rutCtrl.dirty">
+      invalid RUT
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="field-area">
+    <mat-label>Name</mat-label>
+    <input matInput #name formControlName="nameCtrl" placeholder="" maxlength="50" required>
+    <mat-hint align="end"> {{name.value.length}} / 50</mat-hint>
+    <mat-error *ngIf="personaForm.controls.nameCtrl.errors?.required && personaForm.controls.nameCtrl.dirty">
+      required Name
+    </mat-error>
+    <mat-error *ngIf="personaForm.controls.nameCtrl.errors?.maxlength && personaForm.controls.nameCtrl.dirty">
+      Max. characteres: 50
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Favourites Colors</mat-label>
+    <mat-select formControlName="colorCtrl" multiple>
+      <mat-option *ngFor="let color of colorList" [value]="color.value">{{color.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="field-area">
+    <mat-label>Edad</mat-label>
+    <input matInput type="number" min="18" formControlName="ageCtrl" placeholder="">
+    <mat-error *ngIf="personaForm.controls.ageCtrl.errors?.min && personaForm.controls.ageCtrl.dirty">
+      Debe ser mayor a 18 años
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="field-area">
+    <mat-label>Dirección</mat-label>
+    <textarea matInput #descripcion formControlName="addressCtrl" maxlength="400" matTextareaAutosize
+      matAutosizeMinRows="3" matAutosizeMaxRows="6"></textarea>
+    <mat-hint align="end"> {{descripcion.value.length}} / 400</mat-hint>
+    <mat-error *ngIf="personaForm.controls.addressCtrl.errors?.maxlength && personaForm.controls.addressCtrl.dirty">
+      Máx. caracteres: 400
+    </mat-error>
+  </mat-form-field>
+
+  <div class="button-row">
+    <button mat-raised-button (click)="goToHome()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="!personaForm.valid || processing">
+      <div class="inside-btn">
+        {{isAdd ? 'Add' : isEdit ? 'Edit' : 'Error...'}}
+        <mat-spinner *ngIf="processing" [diameter]="20"> </mat-spinner>
+      </div>
+    </button>
+  </div>
+</form>

@@ -1,0 +1,23 @@
+<div class="light-layout">
+  <div class="col-1">
+  </div>
+  <div class="col-2">
+    <h1>{{isAdd ? 'Add a new Person' : isEdit ? 'Edit a Person' : 'Error...'}}</h1>
+    <ng-container *ngIf="isEdit">
+      <ng-container *ngIf="!person && isError">
+        <h2>Sorry, there are some problem at the moment.</h2>
+      </ng-container>
+      <ng-container *ngIf="!person && !isError">
+        <mat-spinner></mat-spinner>
+      </ng-container>
+      <ng-container *ngIf="person && !isError">
+        <app-admin-person-form [person]="person"></app-admin-person-form>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="isAdd">
+      <app-admin-person-form></app-admin-person-form>
+    </ng-container>
+  </div>
+  <div class="col-3">
+  </div>
+</div>

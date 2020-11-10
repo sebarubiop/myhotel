@@ -1,0 +1,76 @@
+<h1>Person List Management</h1>
+<button mat-flat-button color="primary" (click)="addPerson()" title="Add">
+  <mat-icon>add</mat-icon>
+  Add Single Person
+</button>
+<ng-container *ngIf="temp?.length > 0">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Filter results</mat-label>
+    <mat-select #filtro (selectionChange)="onFilterChange($event)">
+      <mat-option>Select...</mat-option>
+      <mat-option *ngFor="let color of colorList" [value]="color.value">{{color.name}}</mat-option>
+    </mat-select>
+    <mat-hint align="start">
+      {{filtro.value ? filtro.value : "Total"}}: <strong>{{dataSource?.data?.length}}</strong></mat-hint>
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> Creation date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.creation_date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rut">
+      <mat-header-cell *matHeaderCellDef> Rut </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.rut}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="color">
+      <mat-header-cell *matHeaderCellDef> Favourite Color </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.color}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Accions </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="editPerson(element)" title="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deletePerson(element)" title="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="temp?.length" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="pageSizeOptions"
+    showFirstLastButtons></mat-paginator>
+</ng-container>
+<ng-container *ngIf="temp?.length === 0 && !isError">
+  <h2>No records yet. Add a new record with the button above.</h2>
+</ng-container>
+<ng-container *ngIf="!temp && !isError">
+  <mat-spinner></mat-spinner>
+</ng-container>
+<ng-container *ngIf="!temp && isError">
+  <h2>Sorry, there are some problem at the moment.</h2>
+</ng-container>
