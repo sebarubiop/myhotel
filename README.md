@@ -12,3 +12,6 @@ Por último, los resultados cuentan con un filtro por resultados y un pipe que o
 
 Clona este repo e instala los paquetes de dependencias (previamente tener Node.js instalado). Correr `npm install` en la raíz del proyecto y luego corre el comando `ng serve` para correr la app con el servidor de dev. Navega a `http://localhost:4200/`. 
 
+## DEMO online
+
+Ver la app funcionando en el siguiente link [https://myhotel-techtest.herokuapp.com/](https://myhotel-techtest.herokuapp.com/).
