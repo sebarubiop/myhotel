@@ -14,4 +14,4 @@ Clona este repo e instala los paquetes de dependencias (previamente tener Node.j
 
 ## DEMO online
 
-Ver la app funcionando en el siguiente link [https://myhotel-techtest.herokuapp.com/](https://myhotel-techtest.herokuapp.com/).
+Ver la app funcionando en el siguiente link [https://myhotel-techtest.herokuapp.com/](https://myhotel-techtest.herokuapp.com/). Ten paciencia, puede que se demore un poco en levantarse el servidor, ya que es una versión gratis.
